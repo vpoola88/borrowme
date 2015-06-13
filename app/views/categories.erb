@@ -1,0 +1,26 @@
+<div class="categories">
+  <div class="index-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center">Categories</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="category">
+  <div id="section" class="container">
+    <% @categories.each do |category_tile| %>
+      <a href="/categories/<%=category_tile.id%>/posts">
+      <div class="col-sm-4">
+        <div class="<%= category_tile.name.downcase %>">
+          <p><%=category_tile.name %></p>
+        </div>
+      </div>
+      </a>
+    <% end %>
+  </div>
+</div>
+
