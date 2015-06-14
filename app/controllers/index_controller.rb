@@ -1,6 +1,5 @@
 get '/' do
 
-
   erb :index
 
 end
@@ -42,13 +41,21 @@ get '/categories/:category_id/items/:item_id' do
 end
 
 put '/categories/:category_id/items/:item_id' do
-  @item = Item.find_by(id: params[:item_id])
-  @item.update_attributes(name: params[:name])
+  item = Item.find_by(id: params[:item_id])
+  item.update_attributes(name: params[:name], description: params[:description], price: params[:price])
 
   redirect "/categories/#{params[:category_id]}/items"
 end
 
-# DESTROY
+
+# DELETE
+delete '/categories/:category_id/items/:item_id' do
+  item = Item.find(params[:post_id])
+  item.destroy
+
+  redirect to "/categories/#{params[:category_id]}/items"
+end
+
 
 post '/search' do
 

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <h1>Profile!</h1>
+  </div>
+
+  <div class="row">
+    <% @user.each do |user| %>
+      <h2><%= user.name %></h2>
+    <% end %>
+  </div>
+</div>
