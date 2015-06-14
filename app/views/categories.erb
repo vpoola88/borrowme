@@ -10,13 +10,29 @@
   </div>
 </div>
 
+<div class="search">
+  <div id="section">
+      <div class="container">
+          <form class="form" action="/search" method="post">
+
+            <div class="form-group">
+              <label for="search">search:</label>
+              <input type="text" class="form-control" name="search" value="">
+            </div>
+
+            <button type="submit" class="btn btn-default" >Submit</button>
+          </form>
+      </div>
+</div>
+</div>
+
 <div class="category">
   <div id="section" class="container">
     <% @categories.each do |category_tile| %>
-      <a href="/categories/<%=category_tile.id%>/posts">
+      <a href="/categories/<%=category_tile.id%>/items">
       <div class="col-sm-4">
-        <div class="<%= category_tile.name.downcase %>">
-          <p><%=category_tile.name %></p>
+        <div class="<%= category_tile.title.downcase %>">
+          <p><%=category_tile.title %></p>
         </div>
       </div>
       </a>

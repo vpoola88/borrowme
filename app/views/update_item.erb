@@ -1,0 +1,35 @@
+<div class="categories">
+  <div class="index-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center"><%= @item.name %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <h3>Update Item:</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Item</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <form action="/categories/<%= params[:category_id]%>/items/<%=@item.id%>" method="post">
+        <tr>
+          <td><input type="hidden" name="_method" value="put"></td>
+          <td><input type="text" name="name" value="<%=@item.name%>"></td>
+          <td><input type="text" name="name" value="<%=@item.description%>"></td>
+          <td><input type="text" name="name" value="<%=@item.price%>"></td>
+          <td><input type="submit" name="update" value="update"></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>

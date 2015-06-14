@@ -1,0 +1,23 @@
+<div class="index">
+  <div class="index-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center">BorrowMe</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+      <h2>Search Results:</h2>
+      <% if @search.first %>
+        <% @search.each do |item| %>
+        <p><%= item.name %></p>
+        <% end %>
+      <% else %>
+        <h5>Nothing</h5>
+      <% end %>
+  </div>
+</div>

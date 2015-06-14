@@ -189,5 +189,24 @@ h1,h2,h3,h4 {
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.account {
+  background: url('http://khongthe.com/wallpapers/abstract/rusty-lock-on-a-locker-233877.jpg')no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+}
+.account h1 {
+  color: #FFF;
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+.account p {
+  color: #FFF;
+  text-align: center;
+  padding: 70px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.4);
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 
 

@@ -1,5 +1,6 @@
 get '/' do
 
+
   erb :index
 
 end
@@ -7,15 +8,59 @@ end
 
 get '/categories' do
 
+  redirect '/login' unless session[:user_id]
+
   @categories = Category.all
   erb :categories
-  
-end
-
-get '/categories/:id/posts' do
-  
-  @posts = Post.where(id: params[:category_id])
-
-  erb :post
 
 end
+
+# CREATE
+get '/categories/:category_id/items' do
+
+  @category = Category.where(id: params[:category_id])
+  @items = Item.where(category_id: params[:category_id])
+
+  erb :items
+end
+
+post '/categories/:category_id/items' do
+
+  @item = Item.create(name: params[:name], description: params[:description], price: params[:price], category_id: params[:category_id])
+
+  redirect "/categories/#{params[:category_id]}/items"
+end
+
+# UPDATE
+
+get '/categories/:category_id/items/:item_id' do
+
+  @item = Item.find_by(id: params[:item_id])
+
+  erb :update_item
+
+end
+
+put '/categories/:category_id/items/:item_id' do
+  @item = Item.find_by(id: params[:item_id])
+  @item.update_attributes(name: params[:name])
+
+  redirect "/categories/#{params[:category_id]}/items"
+end
+
+# DESTROY
+
+post '/search' do
+
+  @search = Item.where(name: params[:search])
+
+  erb :search
+
+end
+
+
+
+
+
+
+
