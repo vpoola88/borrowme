@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   has_many :items
 
-  validates :name, :username, :password, presence: true
-  validates :username, uniqueness: true
+  validates :username, :presence => true, :uniqueness => true
+  validates :name, :presence => true
+  validates :password, :presence => true
 
   include BCrypt
 

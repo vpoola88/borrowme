@@ -1,11 +1,21 @@
-<div class="container">
-  <div class="row">
-    <h1>Profile!</h1>
+<div class="index">
+  <div class="index-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center"><%= @user.name %></h1>
+        </div>
+      </div>
+    </div>
   </div>
+</div>
+
+<div id="section" class="container">
 
   <div class="row">
-    <% @user.each do |user| %>
-      <h2><%= user.name %></h2>
-    <% end %>
+  <h2>Your Items:</h2>
+  <% @user.items.each do |item| %>
+    <h4><%= item.name %></h4>
+  <% end %>
   </div>
 </div>

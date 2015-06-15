@@ -1,6 +1,12 @@
 get '/' do
-
-  erb :index
+  if session[:user_id]
+    @all_users = User.where.not(id: session[:user_id])
+    @user = User.find(session[:user_id])
+    @items = @user.items
+    erb :index
+  else
+    erb :index
+  end
 
 end
 
@@ -25,7 +31,7 @@ end
 
 post '/categories/:category_id/items' do
 
-  @item = Item.create(name: params[:name], description: params[:description], price: params[:price], category_id: params[:category_id])
+  @item = Item.create(name: params[:name], description: params[:description], price: params[:price], category_id: params[:category_id], user_id: session[:user_id])
 
   redirect "/categories/#{params[:category_id]}/items"
 end

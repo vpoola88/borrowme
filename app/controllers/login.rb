@@ -8,13 +8,15 @@ end
 
 post '/login' do
   user = User.find_by(username: params[:username])
-
+  if session[:user_id]
     if user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect '/categories'
-
+    else
+      erb :login
+    end
   else
-    erb :login
+    redirect '/login'
   end
 end
 
@@ -40,7 +42,8 @@ post '/signup' do
 end
 
 get '/profiles/:user_id' do
-  p session[:user_id] = @user.id
+
+  @user = User.find_by(id: params[:user_id])
 
   erb :profile
 end

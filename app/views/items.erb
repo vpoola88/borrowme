@@ -1,4 +1,6 @@
-<div class="categories">
+<% @category.each do |category_title| %>
+<div id="page" class="<%= category_title.title.downcase %>">
+<% end %>
   <div class="index-body">
     <div class="container">
       <div class="row">
@@ -39,13 +41,29 @@
     </table>
   </div>
   <div class="row">
-      <form action="/categories/<%=params[:category_id]%>/items" method="post">
-        <input type="text" name="name">
-        <input type="text" name="description">
-        <input type="text" name="price">
-        <input type="submit">
-      </form>
-  </div>
+  <h3>Add Item:</h3>
+  <br>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <form action="/categories/<%=params[:category_id]%>/items" method="post">
+            <tr>
 
+              <td><input type="text" name="name"></td>
+              <td><input type="text" name="description"></td>
+              <td><input type="text" name="price"></td>
+              <td><input type="submit" name="update" value="Create Item" class="btn btn-default"></td>
+            </tr>
+            </form>
+          </tbody>
+        </table>
+  </div>
 </div>
 
