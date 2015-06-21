@@ -1,5 +1,5 @@
 get '/' do
-  if session[:user_id]
+  if current_user
     @all_users = User.where.not(id: session[:user_id])
     @user = User.find(session[:user_id])
     @items = @user.items
@@ -67,7 +67,9 @@ post '/search' do
 
   @search = Item.where(name: params[:search])
 
-  erb :search
+  # erb :search
+
+  erb :search, locals: {search: @search}, layout: false
 
 end
 

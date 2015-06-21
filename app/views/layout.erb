@@ -39,8 +39,8 @@
                         <li><a href="/profiles/<%= current_user.id %>">Hello, <%= current_user.name %></a></li>
                         <li><a href="/logout">Logout</a></li>
                       <% else %>
-                      <li><a href="/login">Sign In</a></li>
-                      <li><a href="/signup">Sign Up</a></li>
+                      <li class="signin"><a href="/login">Sign In</a></li>
+                      <li class="signup"><a href="/signup">Sign Up</a></li>
                       <% end %>
                    </ul>
                </div>

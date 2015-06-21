@@ -1,5 +1,6 @@
 get '/login' do
-  if session[:user_id]
+  if current_user
+    redirect '/'
   else
     erb :signup
   end
@@ -8,7 +9,7 @@ end
 
 post '/login' do
   user = User.find_by(username: params[:username])
-  if session[:user_id]
+  if current_user
     if user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect '/categories'
@@ -21,37 +22,33 @@ post '/login' do
 end
 
 get '/signup' do
-  erb :signup
-end
-
-post '/signup' do
-
-  @user = User.new(name: params[:name],
-                   username: params[:username])
-
-  @user.password = params[:password]
-
-  if @user.save!
-    session[:user_id] = @user.id
+  if current_user
     redirect '/'
   else
     erb :signup
   end
+end
 
-
+post '/signup' do
+  if params[:password_hash] == params[:verify_password]
+    user = User.new(name: params[:name], username: params[:username], password: params[:password_hash])
+    if user.save
+      session[:user_id] = user.id
+      redirect '/'
+    end
+  end
+  @errors = "Sorry! Your username, or password, or BOTH are incorrect."
+  erb :signup
 end
 
 get '/profiles/:user_id' do
-
   @user = User.find_by(id: params[:user_id])
-
   erb :profile
 end
 
 
 get '/logout' do
   session.delete(:user_id)
-
   redirect '/'
 end
 
