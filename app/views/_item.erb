@@ -1,0 +1,11 @@
+<% @items.each do |item_descripters| %>
+        <span class="added-item">
+          <tr>
+            <td><%= item_descripters.id %></td>
+            <td><%= item_descripters.name %></td>
+            <td><%= item_descripters.description %></td>
+            <td><%= item_descripters.price %></td>
+            <td><a href="/categories/<%=params[:category_id]%>/items/<%= item_descripters.id %>">Edit Item</a></td>
+          </tr>
+        </span>
+        <% end %>

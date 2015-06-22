@@ -1,12 +1,12 @@
 <% @category.each do |category_title| %>
 <div id="page" class="<%= category_title.title.downcase %>">
-<% end %>
+  <% end %>
   <div class="index-body">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
           <% @category.each do |category_title| %>
-            <h1 class="text-center"><%= category_title.title %></h1>
+          <h1 class="text-center"><%= category_title.title %></h1>
           <% end %>
         </div>
       </div>
@@ -16,7 +16,7 @@
 
 <div class="container">
   <br>
-  <div class="row">
+  <div id="display-items" class="row">
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -27,43 +27,35 @@
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>
-        <% @items.each do |item_descripters| %>
-        <tr>
-          <td><%= item_descripters.id %></td>
-          <td><%= item_descripters.name %></td>
-          <td><%= item_descripters.description %></td>
-          <td><%= item_descripters.price %></td>
-          <td><a href="/categories/<%=params[:category_id]%>/items/<%= item_descripters.id %>">Edit Item</a></td>
-        </tr>
-        <% end %>
+      <tbody class="item-list">
+        <%= erb :_item, layout: false, locals: {items: @items} %>
       </tbody>
     </table>
   </div>
-  <div class="row">
-  <h3>Add Item:</h3>
-  <br>
-      <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <form action="/categories/<%=params[:category_id]%>/items" method="post">
-            <tr>
+  <div id="add-items"class="row">
+    <h3>Add Item:</h3>
+    <br>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <form class="<%= params[:category_id] %>" action="/categories/<%=params[:category_id]%>/items" method="post">
+          <tr>
 
-              <td><input type="text" name="name"></td>
-              <td><input type="text" name="description"></td>
-              <td><input type="text" name="price"></td>
-              <td><input type="submit" name="update" value="Create Item" class="btn btn-default"></td>
-            </tr>
-            </form>
-          </tbody>
-        </table>
+            <td><input type="text" name="name" value="mug"></td>
+            <td><input type="text" name="description" value="red"></td>
+            <td><input type="text" name="price" value="9"></td>
+            <td><input data-row="<%= params[:category_id] %>" type="submit" name="update" value="Create Item" class="btn btn-default add_item"></td>
+          </tr>
+        </form>
+      </tbody>
+    </table>
   </div>
 </div>
 

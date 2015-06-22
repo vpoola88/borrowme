@@ -1,27 +1,30 @@
 $(document).ready(function() {
-  $('.search-btn').on("click", function(event){
+
+  $('.add_item').on("click", function(event){
       event.preventDefault();
 
-      var form = $(this)
-      var path = $(this).parent().attr('action');
+      var form = $("."+$(this).attr('data-row'))
+      var path = "/categories/"+$(this).attr('data-row')+"/items"
 
       request = $.ajax({
         url: path,
         type: "POST",
         data: form.serialize()
-      })
+
+      });
+
 
       request.done(function(response){
-        $('.category').html(response);
+        console.log(response);
+        // $('.added-item').append(response);
+        $('tbody.item-list').append(response);
       })
 
       request.fail(function(response){
-        console.log(response);
+        // console.log(response);
+        console.log('You fucked up...');
       })
   })
-
-
-
 });
 
 
@@ -69,3 +72,24 @@ $(document).ready(function() {
   //       console.log('something went wrong!');
   //     })
   // });
+
+// $('.search-btn').on("click", function(event){
+//     event.preventDefault();
+
+//     var form = $(this)
+//     var path = $(this).parent().attr('action');
+
+//     request = $.ajax({
+//       url: path,
+//       type: "POST",
+//       data: form.serialize()
+//     })
+
+//     request.done(function(response){
+//       $('.category').html(response);
+//     })
+
+//     request.fail(function(response){
+//       console.log(response);
+//     })
+// })

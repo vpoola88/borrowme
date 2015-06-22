@@ -18,6 +18,8 @@
         <% @search.each do |item| %>
         <p><%= item.name %></p>
         <p><%= item.id %></p>
+        <p><%= item.category.title %></p>
+        <p><%= item.category.id %></p>
         <% end %>
       <% else %>
         <h3>Couldn't Find That</h3>

@@ -1,3 +1,27 @@
+# CREATE
+get '/categories/:category_id/items' do
+
+  @category = Category.where(id: params[:category_id])
+  @items = Item.where(category_id: params[:category_id])
+
+  erb :items
+end
+
+post '/categories/:category_id/items' do
+  p params
+
+  @item = Item.create(name: params[:name], description: params[:description], price: params[:price], category_id: params[:category_id], user_id: session[:user_id])
+  # @item = Item.new(params)
+    # @item.category_id = params[:category_id]
+    # @item.user_id = session[:user_id]
+    p @item
+  # @item.save
+  # redirect "/categories/#{params[:category_id]}/items"
+
+  erb :_test, layout: false, locals: {item: @item}
+
+end
+
 get '/' do
   if current_user
     @all_users = User.where.not(id: session[:user_id])
@@ -20,21 +44,29 @@ get '/categories' do
 
 end
 
-# CREATE
-get '/categories/:category_id/items' do
+get '/categories/new' do
 
-  @category = Category.where(id: params[:category_id])
-  @items = Item.where(category_id: params[:category_id])
+  redirect '/login' unless session[:user_id]
 
-  erb :items
+  @categories = Category.all
+
+  erb :new_category
+
+  # erb :new_category, layout: false, local: {categories: @categories}
+
 end
 
-post '/categories/:category_id/items' do
+post '/categories' do
 
-  @item = Item.create(name: params[:name], description: params[:description], price: params[:price], category_id: params[:category_id], user_id: session[:user_id])
+  redirect '/login' unless session[:user_id]
 
-  redirect "/categories/#{params[:category_id]}/items"
+  @category = Category.create(title: params[:title], description: params[:description], user_id: session[:user_id])
+
+  redirect '/categories'
+
 end
+
+
 
 # UPDATE
 
@@ -64,7 +96,7 @@ end
 
 
 post '/search' do
-
+  p params.inspect
   @search = Item.where(name: params[:search])
 
   # erb :search

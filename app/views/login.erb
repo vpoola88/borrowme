@@ -13,7 +13,12 @@
 
   <div id="section"class="container">
     <h2>Login</h2>
+
+      <% if @errors %>
+        <%= @errors %>
+      <% end %>
     <form class="form" action="/login" method="post">
+
 
       <div class="form-group">
         <label for="Username">Username:</label>
