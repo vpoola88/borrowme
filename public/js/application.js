@@ -46,6 +46,51 @@ $(document).ready(function() {
       })
   })
 
+  $('.add_category').on("click", function(event){
+      event.preventDefault();
+
+      var form = $(this)
+      var path = $(this).closest('a').attr('href')
+
+      request = $.ajax({
+        url: path,
+        type: "GET",
+        data: form.serialize()
+      })
+
+      request.done(function(response){
+        $('.category').append(response);
+      })
+  })
+
+  $('.categories-page').on("submit", "#newform", function(event){
+      event.preventDefault();
+      // console.log("submit button hit")
+
+      var form = $(this)
+      var path = $(this).attr('action')
+      
+      // debugger
+
+      request = $.ajax({
+        url: path,
+        type: "POST",
+        dataType: "html",
+        data: form.serialize()
+      })
+
+      request.done(function(response){
+        $('.category #section').append(response);
+        console.log(response);
+      })
+
+      request.fail(function(response){
+        console.log("fail");
+        console.log(response);
+      })
+
+  })
+
 });
 
 
