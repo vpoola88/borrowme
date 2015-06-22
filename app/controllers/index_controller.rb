@@ -11,11 +11,7 @@ post '/categories/:category_id/items' do
   p params
 
   @item = Item.create(name: params[:name], description: params[:description], price: params[:price], category_id: params[:category_id], user_id: session[:user_id])
-  # @item = Item.new(params)
-    # @item.category_id = params[:category_id]
-    # @item.user_id = session[:user_id]
-    p @item
-  # @item.save
+
   # redirect "/categories/#{params[:category_id]}/items"
 
   erb :_test, layout: false, locals: {item: @item}

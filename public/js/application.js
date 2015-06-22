@@ -16,15 +16,36 @@ $(document).ready(function() {
 
       request.done(function(response){
         console.log(response);
-        // $('.added-item').append(response);
         $('tbody.item-list').append(response);
       })
 
       request.fail(function(response){
-        // console.log(response);
+        console.log(response);
         console.log('You fucked up...');
       })
   })
+
+  $('.search-btn').on("click", function(event){
+      event.preventDefault();
+
+      var form = $(this)
+      var path = $(this).parent().attr('action');
+
+      request = $.ajax({
+        url: path,
+        type: "POST",
+        data: form.serialize()
+      })
+
+      request.done(function(response){
+        $('.category').html(response);
+      })
+
+      request.fail(function(response){
+        console.log(response);
+      })
+  })
+
 });
 
 
@@ -73,23 +94,4 @@ $(document).ready(function() {
   //     })
   // });
 
-// $('.search-btn').on("click", function(event){
-//     event.preventDefault();
 
-//     var form = $(this)
-//     var path = $(this).parent().attr('action');
-
-//     request = $.ajax({
-//       url: path,
-//       type: "POST",
-//       data: form.serialize()
-//     })
-
-//     request.done(function(response){
-//       $('.category').html(response);
-//     })
-
-//     request.fail(function(response){
-//       console.log(response);
-//     })
-// })

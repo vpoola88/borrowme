@@ -7,25 +7,13 @@ get '/login' do
 end
 
 post '/login' do
-  user = User.find_by(username: params[:username])
-  # if current_user
-  #   if user.authenticate(params[:password])
-  #     session[:user_id] = user.id
-  #     redirect '/categories'
-  #   else
-  #     erb :login
-  #   end
-  # else
-  #   redirect '/login'
-  # end
-
-  if @user && @user.password_hash = params[:password_hash]
-      session[:user_id] = @user.id
-      redirect '/'
-    else
-      @errors = "Your login info was incorrect! Please try again!"
-      erb :login
-    end
+  if @user = User.authenticate(params[:username], params[:password])
+    session[:user_id] = @user.id
+    redirect '/'
+  else
+    @errors = "Your login info was incorrect! Please try again!"
+    erb :login
+  end
 end
 
 get '/signup' do
@@ -37,8 +25,8 @@ get '/signup' do
 end
 
 post '/signup' do
-  if params[:password_hash] == params[:verify_password]
-    user = User.new(name: params[:name], username: params[:username], password: params[:password_hash])
+  if params[:password]
+    user = User.new(name: params[:name], username: params[:username], password: params[:password])
     if user.save
       session[:user_id] = user.id
       redirect '/'

@@ -48,9 +48,9 @@
         <form class="<%= params[:category_id] %>" action="/categories/<%=params[:category_id]%>/items" method="post">
           <tr>
 
-            <td><input type="text" name="name" value="mug"></td>
-            <td><input type="text" name="description" value="red"></td>
-            <td><input type="text" name="price" value="9"></td>
+            <td><input type="text" name="name" value=""></td>
+            <td><input type="text" name="description" value=""></td>
+            <td><input type="text" name="price" value=""></td>
             <td><input data-row="<%= params[:category_id] %>" type="submit" name="update" value="Create Item" class="btn btn-default add_item"></td>
           </tr>
         </form>

@@ -60,12 +60,13 @@
 
 		<div class="row">
 		<h2>Friends</h2>
-		<div class="col-sm-6">
+		<div class="col-sm-12">
 			<div class="row">
 				<% @all_users.each do |user| %>
-				<div class="col-xs-4 text-center">
-					<h4><a href="/profiles/<%=user.id %>"><%= user.name %></a></h4>
-				</div>
+					<div class="col-xs-4 text-center">
+						<a class="btn btn-default" href="/profiles/<%=user.id %>"><%= user.name %></a>
+					</div>
+					<br>
 				<% end %>
 			</div>
 		</div>
