@@ -1,9 +1,11 @@
 
 get '/categories/:category_id/items' do
   
-  @category = Category.where(id: params[:category_id])
+  @category = Category.where(id: params[:category_id]).first
   
-  @items = Item.where(category_id: params[:category_id])
+  # @items = Item.where(category_id: params[:category_id])
+
+  @items = @category.items
 
   erb :items
 
@@ -18,11 +20,15 @@ post '/categories/:category_id/items' do
 
 end
 
+# get '/categories/:category_id/items/:item_id/' do
+#   # erb :'items/show'
+#   erb :item_show
+# end
 
-get '/categories/:category_id/items/:item_id' do
+get '/categories/:category_id/items/:item_id/edit' do
 
-  @item = Item.find_by(id: params[:item_id])
-
+  @item = Item.find(params[:item_id])
+  erb :'items/edit'
   erb :update_item
 
 end
@@ -30,7 +36,7 @@ end
 
 put '/categories/:category_id/items/:item_id' do
 
-  item = Item.find_by(id: params[:item_id])
+  item = Item.find(params[:item_id])
 
   item.update_attributes(name: params[:name], description: params[:description], price: params[:price])
 

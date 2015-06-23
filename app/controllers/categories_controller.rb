@@ -25,13 +25,19 @@ end
 
 post '/categories' do
 
-  @category = Category.create(title: params[:title], description: params[:description], user_id: session[:user_id])
+  all_categories = Category.where(title: params[:title])
 
-  p params
+  all_categories.each do |category|
 
-  p @category 
+    if category.user_id == current_user.id
+      @errors = "Category already exists!"
+    else
+      @category = Category.create(title: params[:title], description: params[:description], user_id: session[:user_id])
+      erb :_category, layout: false, locals: {category: @category}
+    end
 
-  erb :_category, layout: false, locals: {category: @category}
+  end
+
 
 end
 

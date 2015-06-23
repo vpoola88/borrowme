@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   
   has_many :items
-  has_many :categories
+  has_many :category_users
+  has_many :categories, :through => :category_users
 
   validates :username, :presence => true, :uniqueness => true
   validates :name, :presence => true

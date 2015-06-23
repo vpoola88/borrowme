@@ -59,7 +59,10 @@ $(document).ready(function() {
       })
 
       request.done(function(response){
-        $('.category').append(response);
+
+        if($('.createcategory').length === 0){
+          $('.category').append(response)
+        }
       })
   })
 
@@ -75,13 +78,12 @@ $(document).ready(function() {
       request = $.ajax({
         url: path,
         type: "POST",
-        dataType: "html",
         data: form.serialize()
       })
 
       request.done(function(response){
-        $('.category #section').append(response);
         console.log(response);
+        $('.category #section').append(response);
       })
 
       request.fail(function(response){
@@ -92,6 +94,8 @@ $(document).ready(function() {
   })
 
 });
+
+
 
 
 
