@@ -51,7 +51,7 @@ $(document).ready(function() {
 
       var form = $(this)
       var path = $(this).closest('a').attr('href')
-
+      debugger
       request = $.ajax({
         url: path,
         type: "GET",
@@ -73,7 +73,7 @@ $(document).ready(function() {
       var form = $(this)
       var path = $(this).attr('action')
       
-      // debugger
+      debugger
 
       request = $.ajax({
         url: path,
@@ -83,12 +83,14 @@ $(document).ready(function() {
 
       request.done(function(response){
         console.log(response);
+        // debugger
         $('.category #section').append(response);
+        // $('.category #section').append(response.html);
       })
 
       request.fail(function(response){
         console.log("fail");
-        console.log(response);
+        console.log(response)
       })
 
   })

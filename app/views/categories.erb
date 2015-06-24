@@ -29,12 +29,12 @@
 
   <div class="category">
     <div id="section" class="container">
-      <% @categories.each do |category| %>
+
+    <% @categories.each do |category_new| %>
+
+      <%= erb :_category, layout: false, locals: {category_new: category_new} %>
       
-      <%= erb :_category, layout: false, locals: {category: category} %>
-
-      <% end %>
-
+    <% end %>
       
       
       <a href="/categories/new">
