@@ -51,7 +51,7 @@ $(document).ready(function() {
 
       var form = $(this)
       var path = $(this).closest('a').attr('href')
-      debugger
+      // debugger
       request = $.ajax({
         url: path,
         type: "GET",
@@ -68,11 +68,9 @@ $(document).ready(function() {
 
   $('.categories-page').on("submit", "#newform", function(event){
       event.preventDefault();
-      // console.log("submit button hit")
-
       var form = $(this)
       var path = $(this).attr('action')
-      
+
       debugger
 
       request = $.ajax({
@@ -83,7 +81,7 @@ $(document).ready(function() {
 
       request.done(function(response){
         console.log(response);
-        // debugger
+        debugger
         $('.category #section').append(response);
         // $('.category #section').append(response.html);
       })

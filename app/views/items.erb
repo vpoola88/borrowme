@@ -28,7 +28,11 @@
         </tr>
       </thead>
       <tbody class="item-list">
-        <%= erb :_item, layout: false, locals: {items: @items} %>
+        <% @items.each do |item| %>
+          <span class="added-item">
+            <%= erb :_item, layout: false, locals: {item: item} %>
+          </span>
+        <% end %>
       </tbody>
     </table>
   </div>
