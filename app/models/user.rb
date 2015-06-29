@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
+  
   has_many :items
+  has_many :category_users
+  has_many :categories, :through => :category_users
 
   validates :username, :presence => true, :uniqueness => true
   validates :name, :presence => true
@@ -16,7 +19,13 @@ class User < ActiveRecord::Base
     self.password_hash = @password
   end
 
-  def authenticate(password)
-    self.password == password
+  def self.authenticate(username, password)
+    user = User.where(username: username).first
+    if user && user.password == password
+      return user
+    else
+      return nil
+    end
   end
+
 end

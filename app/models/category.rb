@@ -1,9 +1,10 @@
 class Category < ActiveRecord::Base
+
   has_many :items
+  has_many :category_users
+  has_many :users, :through => :category_users
+
+  validates :title, :uniqueness => true, presence: true, length: {minimum: 3}
+  validates :description, presence: true
+
 end
-
-
-# <form action="/results" method="post">
-#   <input type="text" name="tag" placeholder="BUDDY TIME">
-#   <input type="submit" >
-# </form></h4>
