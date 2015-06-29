@@ -71,7 +71,7 @@ $(document).ready(function() {
       var form = $(this)
       var path = $(this).attr('action')
 
-      debugger
+      // debugger
 
       request = $.ajax({
         url: path,
@@ -81,7 +81,7 @@ $(document).ready(function() {
 
       request.done(function(response){
         console.log(response);
-        debugger
+        // debugger
         $('.category #section').append(response);
         // $('.category #section').append(response.html);
       })
