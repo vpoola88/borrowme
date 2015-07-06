@@ -1,5 +1,9 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
+#organizeinfo {
+  display: none;
+}
+
 .index {
   background: url('http://upload.wikimedia.org/wikipedia/commons/3/39/Powell_Street,_San_Francisco.jpg') no-repeat;
   background-size: cover;

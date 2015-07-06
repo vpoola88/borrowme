@@ -1,0 +1,46 @@
+<div class="index">
+  <div class="index-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center"><%= @user.name %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class"container">
+  <% if current_user.accepted_friends.include?(@user) %>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h2><%= @user.name %></h2>
+        <ul>
+          <% @user.items.each do |item| %>
+          <li><%= item.name %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h2><%= @user.name %></h2>
+        <% if @user.id != current_user.id && current_user.pending_friends.include?(@user)%>
+          <h3>(Friend Request Pending...)</h3>
+        <% elsif @user.id != current_user.id && !current_user.accepted_friends.include?(@user)%>
+          <form action="/users/<%= @user.id %>/friends" method="post">
+            <input type="submit" value="Add Friend">
+          </form>
+        <% elsif @user.id == current_user.id %>
+        <% else %>
+          <h3>Already friends!</h3>
+          <form action="/friends/<%= @user.id %>" method="post">
+            <input type="hidden" name="_method" value="delete" />
+            <input type="submit" value="Remove Friend" />
+          </form>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

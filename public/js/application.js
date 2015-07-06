@@ -93,6 +93,14 @@ $(document).ready(function() {
 
   })
 
+  // $('.organize').click(function(){
+  //   $("#organizeinfo").toggle('slide', {
+  //     duration: 1000,
+  //     easing: 'easeOutBounce',
+  //     direction: 'up'
+  //   });
+  // });
+
 });
 
 

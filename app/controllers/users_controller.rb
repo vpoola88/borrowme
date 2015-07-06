@@ -52,8 +52,22 @@ end
 get '/profiles/:user_id' do
 
   @user = User.find_by(id: params[:user_id])
-  erb :profile
 
+  @friends = current_user.accepted_friends
+
+  @pendingfriends = current_user.pending_friends
+
+  if @user.id != current_user.id
+    erb :userpage
+  else
+    erb :profile
+  end
+
+end
+
+post '/profiles/:user_id/friends' do
+  Friendship.create(user_id: current_user.id, friend_id: params[:user_id])
+  redirect "/profiles/#{:user_id}"
 end
 
 

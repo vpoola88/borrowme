@@ -11,11 +11,42 @@
 </div>
 
 <div id="section" class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h2>Your Items:</h2>
+      <% @user.items.each do |item| %>
+        <h4><%= item.name %></h4>
+      <% end %>
+    </div>
+    <div class="col-sm-4">
+      <h2>Your Friends:</h2>
+      <% @friends.each do |friend| %>
+        <h4><%= friend.name %></h4>
+      <% end %>
+    </div>
+
+    <div class="col-sm-4">
+      <h2>Friend Requests:</h2>
+      <% @pendingfriends.each do |friend| %>
+        <h4><%= friend.name %></h4>
+      <% end %>
+    </div>
+  </div>
 
   <div class="row">
-  <h2>Your Items:</h2>
-  <% @user.items.each do |item| %>
-    <h4><%= item.name %></h4>
-  <% end %>
+    <% if @user.id != current_user.id && current_user.pending_friends.include?(@user)%>
+      <h3>(Friend Request Pending...)</h3>
+    <% elsif @user.id != current_user.id && !current_user.accepted_friends.include?(@user)%>
+      <form action="/users/<%= @user.id %>/friends" method="post">
+        <input type="submit" value="Add Friend">
+      </form>
+    <% elsif @user.id == current_user.id %>
+    <% else %>
+      <h3>Already friends!</h3>
+      <form action="/friends/<%= @user.id %>" method="post">
+        <input type="hidden" name="_method" value="delete" />
+        <input type="submit" value="Remove Friend" />
+      </form>
+    <% end %>
   </div>
 </div>

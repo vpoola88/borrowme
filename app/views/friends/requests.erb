@@ -1,0 +1,29 @@
+<div class="index">
+  <div class="index-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center"><%= current_user.name %></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="section" class="container">
+  <h3><%= current_user.username %>'s friend Requests:</h3>
+  <% @friends.each do |friend| %>
+    <p>
+      <a href="/users/<%= friend.id %>"><%= friend.username %></a>
+      <% if current_user %>
+        <form action="/friends/<%= friend.id %>/new" method="post">
+          <input type="submit" value="Add friend">
+        </form>
+        <form action="/friends/<%= friend.id %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Ignore Request">
+        </form>
+      <% end %>
+    </p>
+  <% end %>
+</div>
